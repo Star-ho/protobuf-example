@@ -1,3 +1,3 @@
-rootProject.name = "grpc-test"
+rootProject.name = "protobuf-example"
 include("sender")
 include("receiver")

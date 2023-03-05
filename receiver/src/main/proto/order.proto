@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option java_package = "com.grpc.receiver";
+option java_outer_classname = "OrderGrpc";
+option java_generic_services = true;
+
+
+message OrderRequest{
+  int32 id = 1;
+}
+message Testaaa{
+  int32 id=1;
+  string name = 2;
+}
+
+message OrderResponse {
+  int32 id = 1;
+  repeated MenuResponse menu = 2;
+  repeated MemberResponse member = 3;
+}
+
+message MemberResponse {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+  repeated PhoneNumber phone = 4;
+  message PhoneNumber {
+    string number = 1;
+    PhoneType type = 2;
+
+    enum PhoneType {
+      MOBILE = 0;
+      LANDLINE = 1;
+    }
+  }
+}
+
+message MenuResponse {
+  int32 id = 1;
+  string name = 2;
+  int32 price = 3;
+}
+
+service OrderGrpcRepository{
+  rpc FindOrder(OrderRequest) returns (OrderResponse){}
+}
