@@ -1,0 +1,12 @@
+logging:
+    level:
+        root: debug
+grpc:
+    client:
+        receiver:
+            address : 'static://127.0.0.1:8081'
+            negotiation-type : plaintext
+
+server:
+  http2:
+      enabled: true
