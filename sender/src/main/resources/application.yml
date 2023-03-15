@@ -4,9 +4,10 @@ logging:
 grpc:
     client:
         receiver:
-            address : 'static://127.0.0.1:8081'
+            address : 'static://127.0.0.1:6565'
             negotiation-type : plaintext
 
 server:
-  http2:
+    http2:
       enabled: true
+    port: 8000

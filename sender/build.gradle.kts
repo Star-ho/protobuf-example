@@ -15,8 +15,8 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 
 val grpcSpringBootStarterVersion = "5.0.0"
 val protobufVersion = "3.22.0"
-val grpcVersion = "1.50.0"
-val grpcKotlinVersion = "1.0.0"
+val grpcVersion = "1.53.0"
+val grpcKotlinVersion = "1.2.0"
 
 repositories {
     gradlePluginPortal()
