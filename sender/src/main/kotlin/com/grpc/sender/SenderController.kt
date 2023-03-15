@@ -1,7 +1,6 @@
 package com.grpc.sender
 
 
-import com.google.protobuf.RpcChannel
 import io.grpc.Channel
 import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.runBlocking
@@ -32,15 +31,15 @@ class SenderController(
 
     @GetMapping("/order/{id}")
     fun getOrder(@PathVariable id:Long): OrderResponse {
-        val stub = OrderGrpcRepositoryGrpc.newBlockingStub(channel)
+//        val stub = OrderGrpcRepositoryGrpc.newBlockingStub(channel)
+        val stub = OrderGrpcRepositoryGrpcKt.OrderGrpcRepositoryCoroutineStub(channel)
         val req = OrderRequest.newBuilder()
             .setId(id.toInt())
             .build()
         println("1111")
-        val a = stub.findOrder(req)
+        val a = runBlocking{ stub.findOrder(req) }
         println("3333")
         return a
-
     }
 }
 
