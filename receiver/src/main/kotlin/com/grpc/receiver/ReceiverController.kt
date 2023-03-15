@@ -18,48 +18,57 @@ class ProtobufConf{
 }
 
 @GrpcService
-class AAA: OrderGrpcRepositoryImplBase() {
-    override fun findOrder(request: OrderRequest?, responseObserver: StreamObserver<OrderResponse>?) {
-        val res = if(request?.id == 1)firstMessage()
+class AAA: OrderGrpcRepositoryGrpcKt.OrderGrpcRepositoryCoroutineImplBase() {
+    override suspend fun findOrder(request: OrderRequest): OrderResponse {
+        return if(request.id == 1)firstMessage()
         else secondMessage()
-        responseObserver?.onNext(res)
-        responseObserver?.onCompleted()
     }
+}
 
-    fun firstMessage(): OrderResponse {
-        val member = MemberResponse.newBuilder()
-            .setId(1)
-            .setEmail("email1")
-            .addPhone(MemberResponse.PhoneNumber.newBuilder().setNumber("111").setType(MemberResponse.PhoneNumber.PhoneType.MOBILE).build())
-            .setName("name1")
-            .build()
-        val menu = MenuResponse.newBuilder()
-            .setId(1)
-            .setName("menu1")
-            .setPrice(123123)
-            .build()
-        return OrderResponse.newBuilder()
-            .setId(1)
-            .addMember(member)
-            .addMenu(menu)
-            .build()
-    }
-    fun secondMessage(): OrderResponse {
-        val member = MemberResponse.newBuilder()
-            .setId(2)
-            .setEmail("email2")
-            .addPhone(MemberResponse.PhoneNumber.newBuilder().setNumber("111").setType(MemberResponse.PhoneNumber.PhoneType.MOBILE).build())
-            .setName("name2")
-            .build()
-        val menu = MenuResponse.newBuilder()
-            .setId(2)
-            .setName("menu2")
-            .setPrice(123123)
-            .build()
-        return OrderResponse.newBuilder()
-            .setId(2)
-            .addMember(member)
-            .addMenu(menu)
-            .build()
-    }
+
+//@GrpcService
+//class AAA: OrderGrpcRepositoryImplBase() {
+//    override fun findOrder(request: OrderRequest?, responseObserver: StreamObserver<OrderResponse>?) {
+//        val res = if(request?.id == 1)firstMessage()
+//        else secondMessage()
+//        responseObserver?.onNext(res)
+//        responseObserver?.onCompleted()
+//    }
+//}
+
+fun firstMessage(): OrderResponse {
+    val member = MemberResponse.newBuilder()
+        .setId(1)
+        .setEmail("email1")
+        .addPhone(MemberResponse.PhoneNumber.newBuilder().setNumber("111").setType(MemberResponse.PhoneNumber.PhoneType.MOBILE).build())
+        .setName("name1")
+        .build()
+    val menu = MenuResponse.newBuilder()
+        .setId(1)
+        .setName("menu1")
+        .setPrice(123123)
+        .build()
+    return OrderResponse.newBuilder()
+        .setId(1)
+        .addMember(member)
+        .addMenu(menu)
+        .build()
+}
+fun secondMessage(): OrderResponse {
+    val member = MemberResponse.newBuilder()
+        .setId(2)
+        .setEmail("email2")
+        .addPhone(MemberResponse.PhoneNumber.newBuilder().setNumber("111").setType(MemberResponse.PhoneNumber.PhoneType.MOBILE).build())
+        .setName("name2")
+        .build()
+    val menu = MenuResponse.newBuilder()
+        .setId(2)
+        .setName("menu2")
+        .setPrice(123123)
+        .build()
+    return OrderResponse.newBuilder()
+        .setId(2)
+        .addMember(member)
+        .addMenu(menu)
+        .build()
 }

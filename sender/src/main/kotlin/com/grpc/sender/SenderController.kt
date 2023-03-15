@@ -41,7 +41,9 @@ class SenderController(
 @Service
 class OrderRepository(
     @GrpcClient("local-grpc-server")
-    private val stub:OrderGrpcRepositoryBlockingStub
+    private val stub:OrderGrpcRepositoryGrpcKt.OrderGrpcRepositoryCoroutineStub
+//    @GrpcClient("local-grpc-server")
+//    private val stub:OrderGrpcRepositoryBlockingStub
 ){
     suspend fun aaa(id:Long): OrderResponse {
         val req = OrderRequest.newBuilder()
