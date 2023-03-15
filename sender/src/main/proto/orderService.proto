@@ -1,8 +1,15 @@
 syntax = "proto3";
 
-option java_package = "com.grpc.sender";
+option java_package = "com.grpc.receiver";
 option java_outer_classname = "OrderGrpc";
+option java_multiple_files = true;
 option java_generic_services = true;
+
+service OrderGrpcRepository{
+  rpc FindOrder(OrderRequest) returns (OrderResponse){
+
+  }
+}
 
 message Testaaa{
   int32 id=1;
@@ -39,8 +46,4 @@ message MenuResponse {
   int32 id = 1;
   string name = 2;
   int32 price = 3;
-}
-
-service OrderGrpcRepository{
-  rpc FindOrder(OrderRequest) returns (OrderResponse){}
 }
